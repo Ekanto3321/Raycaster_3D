@@ -60,7 +60,7 @@ public class Core extends JFrame {
                 setPlayerX(e.getX());
                 g.setX(getPlayerX());
                 setPlayerY(e.getY());
-                g.setY(getPlayerY());
+                g.setY(getPlayerY()-40);
             }
         });
 
@@ -96,6 +96,16 @@ public class Core extends JFrame {
                     case'd':
                         g.startA=(360+g.startA-speed)%360;
                         g.endA = g.startA+(fov/2);
+                        break;
+                    case'e':
+                        if(g.getTargetY()>0&&g.getTargetY()<width&&g.getTargetX()>0&&g.getTargetX()<width) {
+                            g.getW().map[(int) (g.getTargetY() / 40)][(int) (g.getTargetX() / 40)] = 0;
+                        }
+                        break;
+                    case'q':
+                        if(g.getTargetY()>0&&g.getTargetY()<width&&g.getTargetX()>0&&g.getTargetX()<width) {
+                            g.getW().map[(int) (g.getTargetY() / 40)][(int) (g.getTargetX() / 40)] = 1;
+                        }
                         break;
                     default:
                         break;
