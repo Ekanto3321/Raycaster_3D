@@ -69,7 +69,7 @@ public class Gfx extends JPanel{
         g.setColor(Color.lightGray);
         g.drawOval(x-10,y-10,20,20);
         //drawing rays
-        for (int i = startA-fov/2; i < endA; i+=5){
+        for (int i = startA-fov/2; i < endA; i++){
             int x1 = x;
             int y1 = y;
             int x2 = x+(int)(100*Math.sin(Math.toRadians(i)));
@@ -77,8 +77,8 @@ public class Gfx extends JPanel{
             if(x1<width&&x1>(0)&&y1<width&&y1>(0)){
                 for (int j = 0; j < w.mapUnit; j++) {
                     for (int k = 0; k < w.mapUnit ; k++) {
-                        if(x2>(unitWidth*(k+1))-unitWidth&&x2<(unitWidth*(k+1))
-                            &&y2>(unitWidth*(j+1))-unitWidth&&y2<(unitWidth*(j+1))
+                        if(x2>=(unitWidth*(k+1))-unitWidth&&x2<=(unitWidth*(k+1))
+                            &&y2>=(unitWidth*(j+1))-unitWidth&&y2<=(unitWidth*(j+1))
                             &&w.map[j][k]==0){
                             g.drawLine(x1,y1, x2, y2);
                         }
