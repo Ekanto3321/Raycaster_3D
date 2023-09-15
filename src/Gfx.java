@@ -55,8 +55,7 @@ public class Gfx extends JPanel{
         return targetY;
     }
 
-    int x2;
-    int y2;
+    int x1,y1,x2,y2;
 
 
     @Override
@@ -82,10 +81,10 @@ public class Gfx extends JPanel{
 
         //drawing rays
         for (int i = startA-fov/2; i < endA; i+=1){
-            int x1 = x;
-            int y1 = y;
-            int x2 = x+(int)(1*Math.sin(Math.toRadians(i)));
-            int y2 = y+(int)(1*Math.cos(Math.toRadians(i)));
+            x1 = x;
+            y1 = y;
+            x2 = x+(int)(1*Math.sin(Math.toRadians(i)));
+            y2 = y+(int)(1*Math.cos(Math.toRadians(i)));
             if(x1<width&&x1>(0)&&y1<width&&y1>(0)&&x2<width&&x2>(0)&&y2<width&&y2>(0)){
                 n=0;
                 while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
