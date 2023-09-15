@@ -81,7 +81,6 @@ public class Core extends JFrame {
                         g.setY(getPlayerY());
                         playerX += speed * (Math.sin(Math.toRadians(g.startA)));
                         g.setX(getPlayerX());
-                        System.out.println(g.startA);
                     }
                     case 's' -> {
                         playerY -= speed * (Math.cos(Math.toRadians(g.startA)));

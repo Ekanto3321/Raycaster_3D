@@ -20,7 +20,7 @@ public class Gfx extends JPanel{
         return w;
     }
 
-    int x,y;
+    int x,y,n=0;
     int startA,endA;
 
     public void setEndA() {
@@ -65,7 +65,7 @@ public class Gfx extends JPanel{
         for (int i = 0; i < w.mapUnit; i++) {
             for (int j = 0; j < w.mapUnit; j++) {
                 if(w.map[i][j]==1){
-                    g.setColor(Color.gray);
+                    g.setColor(Color.BLUE);
                     g.fillRect((j*width/w.mapUnit),(i*width/w.mapUnit),39,39);
                 }
                 else{
@@ -87,21 +87,12 @@ public class Gfx extends JPanel{
             int x2 = x+(int)(1*Math.sin(Math.toRadians(i)));
             int y2 = y+(int)(1*Math.cos(Math.toRadians(i)));
             if(x1<width&&x1>(0)&&y1<width&&y1>(0)&&x2<width&&x2>(0)&&y2<width&&y2>(0)){
-                for (int j = 0; j < w.mapUnit; j++) {
-                    for (int k = 0; k < w.mapUnit ; k++) {
-//                        if(x2>=(unitWidth*(k+1))-unitWidth&&x2<=(unitWidth*(k+1)) &&y2>=(unitWidth*(j+1))-unitWidth&&y2<=(unitWidth*(j+1)) &&w.map[j][k]==0){
-//                            g.drawLine(x1,y1, x2, y2);
-//                        }
-                        int n=0;
-                        while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
-                            x2 = x1+ (int)(n*Math.sin(Math.toRadians(i)));
-                            y2 = y1+ (int)(n*Math.cos(Math.toRadians(i)));
-                            n++;
-                        }
-                        g.drawLine(x1,y1, x2, y2);
-
-                    }
+                while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
+                    x2 = x1+ (int)(n*Math.sin(Math.toRadians(i)));
+                    y2 = y1+ (int)(n*Math.cos(Math.toRadians(i)));
+                    n+=1;
                 }
+                g.drawLine(x1,y1, x2, y2);
 
             }
         }
@@ -142,8 +133,85 @@ public class Gfx extends JPanel{
 //        }
 
 
+        //Backups 3
+//        for (int i = startA-fov/2; i < endA; i+=10){
+//            int x1 = x;
+//            int y1 = y;
+//            int x2 = x+(int)(1*Math.sin(Math.toRadians(i)));
+//            int y2 = y+(int)(1*Math.cos(Math.toRadians(i)));
+//            if(x1<width&&x1>(0)&&y1<width&&y1>(0)&&x2<width&&x2>(0)&&y2<width&&y2>(0)){
+//                for (int j = 0; j < w.mapUnit; j++) {
+//                    for (int k = 0; k < w.mapUnit ; k++) {
+//                        int n=0;
+//                        while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
+//                            x2 = x1+ (int)(n*Math.sin(Math.toRadians(i)));
+//                            y2 = y1+ (int)(n*Math.cos(Math.toRadians(i)));
+//                            n++;
+//                        }
+//                        g.drawLine(x1,y1, x2, y2);
+//
+//                    }
+//                }
+//
+//            }
+//        }
+
+
 
 
     }
 }
 
+
+//     2D drawing backup
+
+
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//
+//        for (int i = 0; i < w.mapUnit; i++) {
+//            for (int j = 0; j < w.mapUnit; j++) {
+//                if (w.map[i][j] == 1) {
+//                    g.setColor(Color.BLUE);
+//                    g.fillRect((j * width / w.mapUnit), (i * width / w.mapUnit), 39, 39);
+//                } else {
+//                    g.setColor(Color.BLACK);
+//                    g.fillRect((j * width / w.mapUnit), (i * width / w.mapUnit), 39, 39);
+//                }
+//            }
+//
+//        }
+//
+//        //setting color and drawing character
+//        g.setColor(Color.lightGray);
+//        g.drawOval(x - 10, y - 10, 20, 20);
+//
+//        //drawing rays
+//        for (int i = startA - fov / 2; i < endA; i += 5) {
+//            int x1 = x;
+//            int y1 = y;
+//            int x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
+//            int y2 = y + (int) (1 * Math.cos(Math.toRadians(i)));
+//            if (x1 < width && x1 > (0) && y1 < width && y1 > (0) && x2 < width && x2 > (0) && y2 < width && y2 > (0)) {
+//                for (int j = 0; j < w.mapUnit; j++) {
+//                    for (int k = 0; k < w.mapUnit; k++) {
+//                        n = 0;
+//                        while ((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)) {
+//                            x2 = x1 + (int) (n * Math.sin(Math.toRadians(i)));
+//                            y2 = y1 + (int) (n * Math.cos(Math.toRadians(i)));
+//                            n += 1;
+//                        }
+//                        g.drawLine(x1, y1, x2, y2);
+//
+//                    }
+//                }
+//
+//            }
+//        }
+//        //drawing the direction vector
+//        g.setColor(Color.RED);
+//        g.drawLine(x, y, x + (int) (100 * Math.sin(Math.toRadians(startA))), y + (int) (100 * Math.cos(Math.toRadians(startA))));
+//        targetX = x + (int) (100 * Math.sin(Math.toRadians(startA)));
+//        targetY = y + (int) (100 * Math.cos(Math.toRadians(startA)));
+//    }
+//}
