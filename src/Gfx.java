@@ -90,6 +90,7 @@ public class Gfx extends JPanel{
                 while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
                     x2 = x1+ (int)(n*Math.sin(Math.toRadians(i)));
                     y2 = y1+ (int)(n*Math.cos(Math.toRadians(i)));
+                    if(x2>=width||x2<=(0)||y2>=width||y2<=(0))break;
                     n+=1;
                 }
                 g.drawLine(x1,y1, x2, y2);
