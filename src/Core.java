@@ -14,7 +14,7 @@ public class Core extends JFrame {
     double lastFrame;
     double playerX=45;
     double playerY=45;
-    int speed = 5;
+    int speed = 10;
 
     public int getPlayerX() {
         return (int) playerX;
@@ -75,41 +75,40 @@ public class Core extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
 
-                switch (e.getKeyChar()){
-                    case'w':
-                        playerY+=speed*(Math.cos(Math.toRadians(g.startA)));
+                switch (e.getKeyChar()) {
+                    case 'w' -> {
+                        playerY += speed * (Math.cos(Math.toRadians(g.startA)));
                         g.setY(getPlayerY());
-                        playerX+=speed*(Math.sin(Math.toRadians(g.startA)));
+                        playerX += speed * (Math.sin(Math.toRadians(g.startA)));
                         g.setX(getPlayerX());
-                        break;
-                    case's':
-                        playerY-=speed*(Math.cos(Math.toRadians(g.startA)));
+                        System.out.println(g.startA);
+                    }
+                    case 's' -> {
+                        playerY -= speed * (Math.cos(Math.toRadians(g.startA)));
                         g.setY(getPlayerY());
-                        playerX-=speed*(Math.sin(Math.toRadians(g.startA)));
+                        playerX -= speed * (Math.sin(Math.toRadians(g.startA)));
                         g.setX(getPlayerX());
-                        break;
-
-                    case'a':
-                        g.startA=(g.startA+speed)%360;
-                        g.endA = g.startA+(fov/2);
-                        break;
-                    case'd':
-                        g.startA=(360+g.startA-speed)%360;
-                        g.endA = g.startA+(fov/2);
-                        break;
-                    case'e':
-                        if(g.getTargetY()>0&&g.getTargetY()<width&&g.getTargetX()>0&&g.getTargetX()<width) {
+                    }
+                    case 'a' -> {
+                        g.startA = (g.startA + speed) % 360;
+                        g.endA = g.startA + (fov / 2);
+                    }
+                    case 'd' -> {
+                        g.startA = (360 + g.startA - speed) % 360;
+                        g.endA = g.startA + (fov / 2);
+                    }
+                    case 'e' -> {
+                        if (g.getTargetY() > 0 && g.getTargetY() < width && g.getTargetX() > 0 && g.getTargetX() < width) {
                             g.getW().map[(int) (g.getTargetY() / 40)][(int) (g.getTargetX() / 40)] = 0;
                         }
-                        break;
-                    case'q':
-                        if(g.getTargetY()>0&&g.getTargetY()<width&&g.getTargetX()>0&&g.getTargetX()<width) {
+                    }
+                    case 'q' -> {
+                        if (g.getTargetY() > 0 && g.getTargetY() < width && g.getTargetX() > 0 && g.getTargetX() < width) {
                             g.getW().map[(int) (g.getTargetY() / 40)][(int) (g.getTargetX() / 40)] = 1;
                         }
-                        break;
-                    default:
-                        break;
-
+                    }
+                    default -> {
+                    }
                 }
 
 
