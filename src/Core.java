@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Core extends JFrame {
@@ -12,6 +13,7 @@ public class Core extends JFrame {
     double frameRate = 60.0;
     double timePerFrame = 1000000000.0/frameRate;
     double lastFrame;
+    int verticalScaler = 30;
     double playerX=45;
     double playerY=45;
     int speed = 5;
@@ -37,7 +39,7 @@ public class Core extends JFrame {
     Core(){
 
         //init
-        //        setBackground(Color.black);
+        setBackground(Color.black);
         setSize(width,height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -48,6 +50,7 @@ public class Core extends JFrame {
         Gfx g = new Gfx(fov);
         add(g);
         g.setRayIncrement(rayIncrement);
+        g.setVerticalScaler(verticalScaler);
         g.setX(getPlayerX());
         g.setY(getPlayerY());
         g.setUnitWidth(unitWidth);

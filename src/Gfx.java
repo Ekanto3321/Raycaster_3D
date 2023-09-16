@@ -8,7 +8,11 @@ public class Gfx extends JPanel{
 
     Wall w = new Wall();
 
-    int fov,unitWidth,rayIncrement;
+    int fov,unitWidth,rayIncrement,verticalScaler;
+
+    public void setVerticalScaler(int verticalScaler) {
+        this.verticalScaler = verticalScaler;
+    }
 
     public void setRayIncrement(int rayIncrement) {
         this.rayIncrement = rayIncrement;
@@ -113,23 +117,24 @@ public class Gfx extends JPanel{
         }
         //3D drawing
         if(toggle==1) {
-            g.setColor(Color.BLUE);
-            for (int i = startA - fov / 2,inc=0; i < endA; i += rayIncrement,inc++) {
+            g.setColor(Color.white);
+            for (int i = endA,inc=0; i >startA - fov / 2; i -= rayIncrement,inc++) {
                 x1 = x;
                 y1 = y;
                 x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
                 y2 = y + (int) (1 * Math.cos(Math.toRadians(i)));
+
                 if (x1 < width && x1 > (0) && y1 < width && y1 > (0) && x2 < width && x2 > (0) && y2 < width && y2 > (0)) {
                     n = 0;
-                    while ((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)) {
+                    while ((w.map[(int) (y2 / unitWidth)][(int) (x2 / unitWidth)] != 1)) {
                         x2 = x1 + (int) (n * Math.sin(Math.toRadians(i)));
                         y2 = y1 + (int) (n * Math.cos(Math.toRadians(i)));
                         if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
                         n += 1;
                     }
-//                    dist = (int)(Math.sqrt((((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1))-(((Math.abs(y2)-Math.abs(y1)*(y2-y1))))));
-                    dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))-((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
-                    g.fillRect(inc*8,0,8,(int)(((double)dist/100)*(width/4)));
+                    dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
+                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)*verticalScaler)/2),8,(int)(((double)905/dist)*verticalScaler));
+//                    System.out.println(dist);
 
                 }
 
@@ -255,3 +260,33 @@ public class Gfx extends JPanel{
 //        targetY = y + (int) (100 * Math.cos(Math.toRadians(startA)));
 //    }
 //}
+
+
+//3D Backup
+
+//if(toggle==1) {
+//        g.setColor(Color.BLUE);
+//        for (int i = startA - fov / 2,inc=0; i < endA; i += rayIncrement,inc++) {
+//        x1 = x;
+//        y1 = y;
+//        x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
+//        y2 = y + (int) (1 * Math.cos(Math.toRadians(i)));
+//
+//        if (x1 < width && x1 > (0) && y1 < width && y1 > (0) && x2 < width && x2 > (0) && y2 < width && y2 > (0)) {
+//        n = 0;
+//        while ((w.map[(int) (y2 / unitWidth)][(int) (x2 / unitWidth)] != 1)) {
+//        x2 = x1 + (int) (n * Math.sin(Math.toRadians(i)));
+//        y2 = y1 + (int) (n * Math.cos(Math.toRadians(i)));
+//        if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
+//        n += 1;
+//        }
+//        dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
+//        g.fillRect(inc*8,(width/2+35)-(dist/2),8,(int)(((double)dist/905)*width));
+//                    System.out.println(dist);
+//
+//        }
+//
+//        }
+//
+//
+//        }
