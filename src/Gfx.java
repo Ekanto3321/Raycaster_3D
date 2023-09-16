@@ -62,7 +62,7 @@ public class Gfx extends JPanel{
     }
 
     int x1,y1,x2,y2,dist;
-    public static int toggle;
+    public static int toggle,toggleDrag;
 
     public static void setToggle(int t) {
         toggle = t;

@@ -17,6 +17,7 @@ public class Core extends JFrame {
     double playerX=45;
     double playerY=45;
     int speed = 5;
+    int toggleDrag=0;
 
     public int getPlayerX() {
         return (int) playerX;
@@ -64,10 +65,13 @@ public class Core extends JFrame {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                setPlayerX(e.getX());
-                g.setX(getPlayerX());
-                setPlayerY(e.getY());
-                g.setY(getPlayerY()-40);
+                if(toggleDrag==0) {
+                    setPlayerX(e.getX());
+                    g.setX(getPlayerX());
+                    setPlayerY(e.getY());
+                    g.setY(getPlayerY() - 40);
+                }
+
 
             }
 

@@ -21,11 +21,22 @@ public class UserInterface extends JFrame {
         ui.add(b1);
         b1.setBounds(100,100,200,30);
 
+        JButton b2= new JButton("toggle Drag");
+        ui.add(b2);
+        b2.setBounds(100,200,200,30);
+
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(Gfx.toggle==0)Gfx.setToggle(1);
                 else Gfx.setToggle(0);
+            }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Gfx.toggleDrag==0)Gfx.toggleDrag=1;
+                else Gfx.toggleDrag=0;
             }
         });
 
