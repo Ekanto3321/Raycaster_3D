@@ -1,8 +1,7 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
-public class Core extends JFrame {
+public class Core2D extends JFrame {
 
 
     int height = 675;
@@ -14,7 +13,7 @@ public class Core extends JFrame {
     double lastFrame;
     double playerX=45;
     double playerY=45;
-    int speed = 10;
+    int speed = 5;
 
     public int getPlayerX() {
         return (int) playerX;
@@ -34,10 +33,18 @@ public class Core extends JFrame {
 
     int i=0;
 
-    Core(){
+    Core2D(){
+
+        //init
+        //        setBackground(Color.black);
+        setSize(width,height);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setTitle("Raycaster3D");
 
 
-        Gfx g = new Gfx(90);
+        Gfx2D g = new Gfx2D(90);
         add(g);
         g.setX(getPlayerX());
         g.setY(getPlayerY());
@@ -52,15 +59,16 @@ public class Core extends JFrame {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
+                setPlayerX(e.getX());
+                g.setX(getPlayerX());
+                setPlayerY(e.getY());
+                g.setY(getPlayerY()-40);
 
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                setPlayerX(e.getX());
-                g.setX(getPlayerX());
-                setPlayerY(e.getY());
-                g.setY(getPlayerY()-40);
+
             }
         });
 
@@ -119,21 +127,7 @@ public class Core extends JFrame {
             }
         });
 
-
-//        setBackground(Color.black);
-        setSize(width,height);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        setLocationRelativeTo(null);
-        setTitle("Raycaster3D");
     }
-
-    public static void main(String[] args) {
-
-        new Core().loop();
-
-    }
-
 
     public void loop(){
         while(true){

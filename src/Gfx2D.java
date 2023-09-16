@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
 
-public class Gfx extends JPanel{
-    Gfx(int fov){
+public class Gfx2D extends JPanel{
+    Gfx2D(int fov){
         this.fov = fov;
     }
 
@@ -99,9 +97,9 @@ public class Gfx extends JPanel{
         }
         //drawing the direction vector
         g.setColor(Color.RED);
-        g.drawLine(x,y,x+(int)(100*Math.sin(Math.toRadians(startA))), y+(int)(100*Math.cos(Math.toRadians(startA))));
-        targetX = x+(int)(100*Math.sin(Math.toRadians(startA)));
-        targetY = y+(int)(100*Math.cos(Math.toRadians(startA)));
+        g.drawLine(x,y,x+(int)(50*Math.sin(Math.toRadians(startA))), y+(int)(50*Math.cos(Math.toRadians(startA))));
+        targetX = x+(int)(50*Math.sin(Math.toRadians(startA)));
+        targetY = y+(int)(50*Math.cos(Math.toRadians(startA)));
 
 
         //backups

@@ -52,7 +52,7 @@ public class Wall {
             for (int i = 0; i < 256; i++) {
                 intMap[i]="";
             }
-            BufferedReader br = new BufferedReader(new FileReader("map4.ppm"));
+            BufferedReader br = new BufferedReader(new FileReader("map3.ppm"));
             System.out.println("read successfully!");
             for (int i = 0; i < 4; i++)br.readLine();//Flushing the metadata of .ppm file (4 lines)
 
