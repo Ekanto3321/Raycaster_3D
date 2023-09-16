@@ -13,11 +13,10 @@ public class Core extends JFrame {
     double frameRate = 60.0;
     double timePerFrame = 1000000000.0/frameRate;
     double lastFrame;
-    int verticalScaler = 30;
+    int verticalScalar = 20;
     double playerX=45;
     double playerY=45;
     int speed = 5;
-    int toggleDrag=0;
 
     public int getPlayerX() {
         return (int) playerX;
@@ -51,7 +50,7 @@ public class Core extends JFrame {
         Gfx g = new Gfx(fov);
         add(g);
         g.setRayIncrement(rayIncrement);
-        g.setVerticalScaler(verticalScaler);
+        g.setVerticalScalar(verticalScalar);
         g.setX(getPlayerX());
         g.setY(getPlayerY());
         g.setUnitWidth(unitWidth);
@@ -65,13 +64,11 @@ public class Core extends JFrame {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                if(toggleDrag==0) {
-                    setPlayerX(e.getX());
-                    g.setX(getPlayerX());
-                    setPlayerY(e.getY());
-                    g.setY(getPlayerY() - 40);
-                }
 
+                setPlayerX(e.getX());
+                g.setX(getPlayerX());
+                setPlayerY(e.getY());
+                g.setY(getPlayerY()-40);
 
             }
 

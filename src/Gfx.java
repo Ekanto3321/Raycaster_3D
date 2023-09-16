@@ -8,10 +8,10 @@ public class Gfx extends JPanel{
 
     Wall w = new Wall();
 
-    int fov,unitWidth,rayIncrement,verticalScaler;
+    int fov,unitWidth,rayIncrement, verticalScalar;
 
-    public void setVerticalScaler(int verticalScaler) {
-        this.verticalScaler = verticalScaler;
+    public void setVerticalScalar(int verticalScalar) {
+        this.verticalScalar = verticalScalar;
     }
 
     public void setRayIncrement(int rayIncrement) {
@@ -62,7 +62,7 @@ public class Gfx extends JPanel{
     }
 
     int x1,y1,x2,y2,dist;
-    public static int toggle,toggleDrag;
+    public static int toggle;
 
     public static void setToggle(int t) {
         toggle = t;
@@ -117,7 +117,12 @@ public class Gfx extends JPanel{
         }
         //3D drawing
         if(toggle==1) {
-            g.setColor(Color.white);
+            g.setColor(new Color(173, 216, 230));
+            g.fillRect(0,0,width,width/2);
+            g.setColor(new Color(52, 66, 51));
+            g.fillRect(0,width/2,width,width/2);
+
+            g.setColor(new Color(199, 199, 199));
             for (int i = endA,inc=0; i >startA - fov / 2; i -= rayIncrement,inc++) {
                 x1 = x;
                 y1 = y;
@@ -133,12 +138,20 @@ public class Gfx extends JPanel{
                         n += 1;
                     }
                     dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
-                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)*verticalScaler)/2),8,(int)(((double)905/dist)*verticalScaler));
-//                    System.out.println(dist);
+                    if(dist>150)g.setColor(new Color(162, 163, 162));
+                    else g.setColor(new Color(199, 199, 199));
+                    // raw euclidean distance
+//                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)* verticalScalar)/2),8,(int)(((double)905/dist)* verticalScalar));
+                    //adjusted distance
+                    g.fillRect(inc*8,(width/2)-((int)(((double)905/(dist*Math.cos(Math.toRadians(startA-i))))* verticalScalar)/2),8,(int)(((double)905/(dist*Math.cos(Math.toRadians(startA-i))))* verticalScalar));
 
                 }
 
             }
+            g.setColor(Color.RED);
+            g.drawOval(width/2-10,width/2-10,20,20);
+            g.drawLine((width/2),(width/2)-10,(width/2),(width/2)+10);
+            g.drawLine((width/2)-10,(width/2),(width/2)+10,(width/2));
 
 
         }
