@@ -27,7 +27,7 @@ public class Gfx extends JPanel{
     }
 
     int x,y,n=0;
-    int startA,endA;
+    int startA,endA, col;
 
     public void setEndA() {
         endA = startA+(fov/2);
@@ -61,7 +61,7 @@ public class Gfx extends JPanel{
         return targetY;
     }
 
-    int x1,y1,x2,y2,dist;
+    int x1,y1,x2,y2,dist,distA;
     public static int toggle;
 
     public static void setToggle(int t) {
@@ -138,12 +138,15 @@ public class Gfx extends JPanel{
                         n += 1;
                     }
                     dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
-                    if(dist>150)g.setColor(new Color(162, 163, 162));
-                    else g.setColor(new Color(199, 199, 199));
-                    // raw euclidean distance
+                    distA= ((int)(dist*Math.cos(Math.toRadians(startA-i))));
+                    //ADD A COLOR GRADIENT LATER
+                    col = Math.abs(200-(dist/100)*40);
+                    g.setColor(new Color(col, col, col));
+                    // raw Euclidean distance
 //                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)* verticalScalar)/2),8,(int)(((double)905/dist)* verticalScalar));
+
                     //adjusted distance
-                    g.fillRect(inc*8,(width/2)-((int)(((double)905/(dist*Math.cos(Math.toRadians(startA-i))))* verticalScalar)/2),8,(int)(((double)905/(dist*Math.cos(Math.toRadians(startA-i))))* verticalScalar));
+                    g.fillRect(inc*8,(width/2)-((int)(((double)905/distA)* verticalScalar)/2),8,(int)(((double)905/distA)* verticalScalar));
 
                 }
 
