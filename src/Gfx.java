@@ -114,8 +114,7 @@ public class Gfx extends JPanel{
         //3D drawing
         if(toggle==1) {
             g.setColor(Color.BLUE);
-            int inc=0;
-            for (int i = startA - fov / 2; i < endA; i += rayIncrement) {
+            for (int i = startA - fov / 2,inc=0; i < endA; i += rayIncrement,inc++) {
                 x1 = x;
                 y1 = y;
                 x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
@@ -128,14 +127,11 @@ public class Gfx extends JPanel{
                         if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
                         n += 1;
                     }
-                    dist = (int) Math.abs(Math.sqrt((((x1-x2)*(x1-x2))-(((y1-y2)*(y1-y2))))));
-
+//                    dist = (int)(Math.sqrt((((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1))-(((Math.abs(y2)-Math.abs(y1)*(y2-y1))))));
+                    dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))-((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
+                    g.fillRect(inc*8,0,8,(int)(((double)dist/100)*(width/4)));
 
                 }
-
-
-
-
 
             }
 

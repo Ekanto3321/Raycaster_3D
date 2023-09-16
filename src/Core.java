@@ -45,7 +45,7 @@ public class Core extends JFrame {
         setTitle("Raycaster3D");
 
 
-        Gfx g = new Gfx(90);
+        Gfx g = new Gfx(fov);
         add(g);
         g.setRayIncrement(rayIncrement);
         g.setX(getPlayerX());
