@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Core2D extends JFrame {
+public class Core extends JFrame {
 
 
     int height = 675;
     int width = 640;
     int unitWidth = 40;
-    int fov = 90;
+    int fov = 80;
+    int rayIncrement = 1;
     double frameRate = 60.0;
     double timePerFrame = 1000000000.0/frameRate;
     double lastFrame;
@@ -33,7 +34,7 @@ public class Core2D extends JFrame {
 
     int i=0;
 
-    Core2D(){
+    Core(){
 
         //init
         //        setBackground(Color.black);
@@ -44,8 +45,9 @@ public class Core2D extends JFrame {
         setTitle("Raycaster3D");
 
 
-        Gfx2D g = new Gfx2D(90);
+        Gfx g = new Gfx(90);
         add(g);
+        g.setRayIncrement(rayIncrement);
         g.setX(getPlayerX());
         g.setY(getPlayerY());
         g.setUnitWidth(unitWidth);
@@ -134,12 +136,12 @@ public class Core2D extends JFrame {
             if(System.nanoTime()-lastFrame>=timePerFrame){
                 lastFrame = System.nanoTime();
                 repaint();
-                i++;
+//                i++;
             }
-            if(i>=frameRate){
-                System.out.println("FPS: " + i);
-                i = 0;
-            }
+//            if(i>=frameRate){
+//                System.out.println("FPS: " + i);
+//                i = 0;
+//            }
         }
     }
 

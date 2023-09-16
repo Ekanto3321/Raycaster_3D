@@ -1,14 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Gfx2D extends JPanel{
-    Gfx2D(int fov){
+public class Gfx extends JPanel{
+    Gfx(int fov){
         this.fov = fov;
     }
 
     Wall w = new Wall();
 
-    int fov,unitWidth;
+    int fov,unitWidth,rayIncrement;
+
+    public void setRayIncrement(int rayIncrement) {
+        this.rayIncrement = rayIncrement;
+    }
 
     public void setUnitWidth(int unitWidth) {
         this.unitWidth = unitWidth;
@@ -53,53 +57,94 @@ public class Gfx2D extends JPanel{
         return targetY;
     }
 
-    int x1,y1,x2,y2;
+    int x1,y1,x2,y2,dist;
+    public static int toggle;
 
+    public static void setToggle(int t) {
+        toggle = t;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
 
-        for (int i = 0; i < w.mapUnit; i++) {
-            for (int j = 0; j < w.mapUnit; j++) {
-                if(w.map[i][j]==1){
-                    g.setColor(Color.BLUE);
-                    g.fillRect((j*width/w.mapUnit),(i*width/w.mapUnit),39,39);
+        //2D Drawing
+        if(toggle==0) {
+            for (int i = 0; i < w.mapUnit; i++) {
+                for (int j = 0; j < w.mapUnit; j++) {
+                    if (w.map[i][j] == 1) {
+                        g.setColor(Color.BLUE);
+                        g.fillRect((j * width / w.mapUnit), (i * width / w.mapUnit), 39, 39);
+                    } else {
+                        g.setColor(Color.BLACK);
+                        g.fillRect((j * width / w.mapUnit), (i * width / w.mapUnit), 39, 39);
+                    }
                 }
-                else{
-                    g.setColor(Color.BLACK);
-                    g.fillRect((j*width/w.mapUnit),(i*width/w.mapUnit),39,39);
+
+            }
+
+            //setting color and drawing character
+            g.setColor(Color.lightGray);
+            g.drawOval(x - 10, y - 10, 20, 20);
+
+            //drawing rays
+            for (int i = startA - fov / 2; i < endA; i += rayIncrement) {
+                x1 = x;
+                y1 = y;
+                x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
+                y2 = y + (int) (1 * Math.cos(Math.toRadians(i)));
+                if (x1 < width && x1 > (0) && y1 < width && y1 > (0) && x2 < width && x2 > (0) && y2 < width && y2 > (0)) {
+                    n = 0;
+                    while ((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)) {
+                        x2 = x1 + (int) (n * Math.sin(Math.toRadians(i)));
+                        y2 = y1 + (int) (n * Math.cos(Math.toRadians(i)));
+                        if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
+                        n += 1;
+                    }
+                    g.drawLine(x1, y1, x2, y2);
+
                 }
             }
+            //drawing the direction vector
+            g.setColor(Color.RED);
+            g.drawLine(x, y, x + (int) (50 * Math.sin(Math.toRadians(startA))), y + (int) (50 * Math.cos(Math.toRadians(startA))));
+            targetX = x + (int) (50 * Math.sin(Math.toRadians(startA)));
+            targetY = y + (int) (50 * Math.cos(Math.toRadians(startA)));
+
+        }
+        //3D drawing
+        if(toggle==1) {
+            g.setColor(Color.BLUE);
+            int inc=0;
+            for (int i = startA - fov / 2; i < endA; i += rayIncrement) {
+                x1 = x;
+                y1 = y;
+                x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
+                y2 = y + (int) (1 * Math.cos(Math.toRadians(i)));
+                if (x1 < width && x1 > (0) && y1 < width && y1 > (0) && x2 < width && x2 > (0) && y2 < width && y2 > (0)) {
+                    n = 0;
+                    while ((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)) {
+                        x2 = x1 + (int) (n * Math.sin(Math.toRadians(i)));
+                        y2 = y1 + (int) (n * Math.cos(Math.toRadians(i)));
+                        if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
+                        n += 1;
+                    }
+                    dist = (int) Math.abs(Math.sqrt((((x1-x2)*(x1-x2))-(((y1-y2)*(y1-y2))))));
+
+
+                }
+
+
+
+
+
+            }
+
 
         }
 
-        //setting color and drawing character
-        g.setColor(Color.lightGray);
-        g.drawOval(x-10,y-10,20,20);
 
-        //drawing rays
-        for (int i = startA-fov/2; i < endA; i+=1){
-            x1 = x;
-            y1 = y;
-            x2 = x+(int)(1*Math.sin(Math.toRadians(i)));
-            y2 = y+(int)(1*Math.cos(Math.toRadians(i)));
-            if(x1<width&&x1>(0)&&y1<width&&y1>(0)&&x2<width&&x2>(0)&&y2<width&&y2>(0)){
-                n=0;
-                while((w.map[(int) (y2 / 40)][(int) (x2 / 40)] != 1)){
-                    x2 = x1+ (int)(n*Math.sin(Math.toRadians(i)));
-                    y2 = y1+ (int)(n*Math.cos(Math.toRadians(i)));
-                    if(x2>=width||x2<=(0)||y2>=width||y2<=(0))break;
-                    n+=1;
-                }
-                g.drawLine(x1,y1, x2, y2);
 
-            }
-        }
-        //drawing the direction vector
-        g.setColor(Color.RED);
-        g.drawLine(x,y,x+(int)(50*Math.sin(Math.toRadians(startA))), y+(int)(50*Math.cos(Math.toRadians(startA))));
-        targetX = x+(int)(50*Math.sin(Math.toRadians(startA)));
-        targetY = y+(int)(50*Math.cos(Math.toRadians(startA)));
+
 
 
         //backups

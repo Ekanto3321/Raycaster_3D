@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserInterface extends JFrame {
 
@@ -15,9 +17,17 @@ public class UserInterface extends JFrame {
         ui.setLayout(null);
 
         //Components
-        JButton b1= new JButton("a button");
+        JButton b1= new JButton("toggle 2D/3D");
         ui.add(b1);
-        b1.setBounds(100,100,100,30);
+        b1.setBounds(100,100,200,30);
+
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Gfx.toggle==0)Gfx.setToggle(1);
+                else Gfx.setToggle(0);
+            }
+        });
 
 
     }
