@@ -9,11 +9,11 @@ public class Core extends JFrame {
     int width = 640;
     int unitWidth = 40;
     int fov = 80;
-    int rayIncrement = 1;
+    double rayIncrement = 0.25; //change in proportion to verticalWidth
     double frameRate = 60.0;
     double timePerFrame = 1000000000.0/frameRate;
     double lastFrame;
-    int verticalScalar = 20,verticalWidth=8;
+    int verticalScalar = 20,verticalWidth=2; //change in proportion to rayIncrement (verticamWidth^-1 -> K * rayIncrement, 8 -> 1)
     double playerX=45;
     double playerY=45;
     int prevx=0, currentx;

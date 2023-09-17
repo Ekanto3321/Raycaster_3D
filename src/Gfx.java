@@ -10,7 +10,7 @@ public class Gfx extends JPanel{
 
     int fov;
     int unitWidth;
-    int rayIncrement;
+    double rayIncrement;
     int verticalScalar;
 
     public void setVerticalWidth(int verticalWidth) {
@@ -23,7 +23,7 @@ public class Gfx extends JPanel{
         this.verticalScalar = verticalScalar;
     }
 
-    public void setRayIncrement(int rayIncrement) {
+    public void setRayIncrement(double rayIncrement) {
         this.rayIncrement = rayIncrement;
     }
 
@@ -70,7 +70,8 @@ public class Gfx extends JPanel{
         return targetY;
     }
 
-    int x1,y1,x2,y2,dist,distA;
+    int x1,y1,x2,y2,dist;
+    double distA;
     public static int toggle;
 
     public static void setToggle(int t) {
@@ -100,7 +101,7 @@ public class Gfx extends JPanel{
             g.drawOval(x - 10, y - 10, 20, 20);
 
             //drawing rays
-            for (int i = startA - fov / 2; i < endA; i += rayIncrement) {
+            for (double i = startA - (double) fov / 2; i < endA; i += rayIncrement) {
                 x1 = x;
                 y1 = y;
                 x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
@@ -130,7 +131,7 @@ public class Gfx extends JPanel{
             g.fillRect(0,0,width,width/2);
             g.setColor(new Color(52, 66, 51));
             g.fillRect(0,width/2,width,width/2);
-            for (int i = endA,inc=0; i >startA - fov / 2; i -= rayIncrement,inc++) {
+            for (double i = endA, inc = 0; i >startA - (double) fov / 2; i -= rayIncrement,inc++) {
                 x1 = x;
                 y1 = y;
                 x2 = x + (int) (1 * Math.sin(Math.toRadians(i)));
@@ -145,7 +146,7 @@ public class Gfx extends JPanel{
                         n += 1;
                     }
                     dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
-                    distA= ((int)(dist*Math.cos(Math.toRadians(startA-i))));
+                    distA= ((dist*Math.cos(Math.toRadians(startA-i))));
                     //ADD A COLOR GRADIENT LATER
                     col = Math.abs(200-(dist/100)*40);
                     g.setColor(new Color(col, col, col));
@@ -153,7 +154,7 @@ public class Gfx extends JPanel{
 //                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)* verticalScalar)/2),8,(int)(((double)905/dist)* verticalScalar));
 
                     //adjusted distance
-                    g.fillRect(inc*verticalWidth,(width/2)-((int)(((double)905/distA)* verticalScalar)/2),verticalWidth,(int)(((double)905/distA)* verticalScalar));
+                    g.fillRect((int) (inc*verticalWidth),(width/2)-((int)(((double)905/distA)* verticalScalar)/2),verticalWidth,(int)(((double)905/distA)* verticalScalar));
 
                 }
 
