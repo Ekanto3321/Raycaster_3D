@@ -13,7 +13,7 @@ public class Core extends JFrame {
     double frameRate = 60.0;
     double timePerFrame = 1000000000.0/frameRate;
     double lastFrame;
-    int verticalScalar = 20;
+    int verticalScalar = 20,verticalWidth=8;
     double playerX=45;
     double playerY=45;
     int prevx=0, currentx;
@@ -52,6 +52,7 @@ public class Core extends JFrame {
         add(g);
         g.setRayIncrement(rayIncrement);
         g.setVerticalScalar(verticalScalar);
+        g.setVerticalWidth(verticalWidth);
         g.setX(getPlayerX());
         g.setY(getPlayerY());
         g.setUnitWidth(unitWidth);
@@ -117,13 +118,13 @@ public class Core extends JFrame {
                         g.setX(getPlayerX());
                     }
                     case 'a' -> {
-//                        g.startA = (g.startA + speed) % 360;
-//                        g.endA = g.startA + (fov / 2);
+                        g.startA = (g.startA + speed) % 360;
+                        g.endA = g.startA + (fov / 2);
 
                     }
                     case 'd' -> {
-//                        g.startA = (360 + g.startA - speed) % 360;
-//                        g.endA = g.startA + (fov / 2);
+                        g.startA = (360 + g.startA - speed) % 360;
+                        g.endA = g.startA + (fov / 2);
 
 
 
@@ -139,6 +140,12 @@ public class Core extends JFrame {
                             g.getW().map[(int) (g.getTargetY() / 40)][(int) (g.getTargetX() / 40)] = 1;
                         }
                     }
+                    case 'r' ->{
+                        playerY=100;
+                        playerX=100;
+                        g.setX(getPlayerX());
+                        g.setY(getPlayerY());
+                    }
                     default -> {
                     }
                 }
@@ -153,6 +160,8 @@ public class Core extends JFrame {
         });
 
     }
+
+
 
     public void loop(){
         while(true){

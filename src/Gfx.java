@@ -8,7 +8,16 @@ public class Gfx extends JPanel{
 
     Wall w = new Wall();
 
-    int fov,unitWidth,rayIncrement, verticalScalar;
+    int fov;
+    int unitWidth;
+    int rayIncrement;
+    int verticalScalar;
+
+    public void setVerticalWidth(int verticalWidth) {
+        this.verticalWidth = verticalWidth;
+    }
+
+    int verticalWidth;
 
     public void setVerticalScalar(int verticalScalar) {
         this.verticalScalar = verticalScalar;
@@ -144,7 +153,7 @@ public class Gfx extends JPanel{
 //                    g.fillRect(inc*8,(width/2)-((int)(((double)905/dist)* verticalScalar)/2),8,(int)(((double)905/dist)* verticalScalar));
 
                     //adjusted distance
-                    g.fillRect(inc*8,(width/2)-((int)(((double)905/distA)* verticalScalar)/2),8,(int)(((double)905/distA)* verticalScalar));
+                    g.fillRect(inc*verticalWidth,(width/2)-((int)(((double)905/distA)* verticalScalar)/2),verticalWidth,(int)(((double)905/distA)* verticalScalar));
 
                 }
 
