@@ -125,6 +125,7 @@ public class Gfx extends JPanel{
             targetY = y + (int) (50 * Math.cos(Math.toRadians(startA)));
 
         }
+
         //3D drawing
         if(toggle==1) {
             g.setColor(new Color(173, 216, 230));
@@ -145,7 +146,7 @@ public class Gfx extends JPanel{
                         if (x2 >= width || x2 <= (0) || y2 >= width || y2 <= (0)) break;
                         n += 1;
                     }
-                    dist = (int) Math.sqrt(((Math.abs(x2)-Math.abs(x1))*(Math.abs(x2)-Math.abs(x1)))+((Math.abs(y2)-Math.abs(y1))*(Math.abs(y2)-Math.abs(y1))));
+                    dist = (int) Math.sqrt(((x2-x1)*(x2-x1))+(y2-y1)*(y2-y1));
                     distA= ((dist*Math.cos(Math.toRadians(startA-i))));
                     //ADD A COLOR GRADIENT LATER
                     col = Math.abs(200-(dist/100)*40);
@@ -168,6 +169,8 @@ public class Gfx extends JPanel{
         }
 
 
+    }
+}
 
 
 
@@ -225,11 +228,6 @@ public class Gfx extends JPanel{
 //            }
 //        }
 
-
-
-
-    }
-}
 
 
 //     2D drawing backup
