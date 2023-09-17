@@ -16,6 +16,7 @@ public class Core extends JFrame {
     int verticalScalar = 20;
     double playerX=45;
     double playerY=45;
+    int prevx=0, currentx;
     int speed = 5;
 
     public int getPlayerX() {
@@ -65,15 +66,28 @@ public class Core extends JFrame {
             @Override
             public void mouseDragged(MouseEvent e) {
 
-                setPlayerX(e.getX());
-                g.setX(getPlayerX());
-                setPlayerY(e.getY());
-                g.setY(getPlayerY()-40);
+//                setPlayerX(e.getX());
+//                g.setX(getPlayerX());
+//                setPlayerY(e.getY());
+//                g.setY(getPlayerY()-40);
+
+                currentx=e.getX();
+                if(prevx>currentx){
+                    g.startA = (g.startA + 1) % 360;
+                    g.endA = g.startA + (fov / 2);
+                }
+                if(prevx<currentx){
+                    g.startA = (360 + g.startA - 1) % 360;
+                    g.endA = g.startA + (fov / 2);
+                }
+                prevx = currentx;
+
 
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
+
 
             }
         });
@@ -103,12 +117,17 @@ public class Core extends JFrame {
                         g.setX(getPlayerX());
                     }
                     case 'a' -> {
-                        g.startA = (g.startA + speed) % 360;
-                        g.endA = g.startA + (fov / 2);
+//                        g.startA = (g.startA + speed) % 360;
+//                        g.endA = g.startA + (fov / 2);
+
                     }
                     case 'd' -> {
-                        g.startA = (360 + g.startA - speed) % 360;
-                        g.endA = g.startA + (fov / 2);
+//                        g.startA = (360 + g.startA - speed) % 360;
+//                        g.endA = g.startA + (fov / 2);
+
+
+
+
                     }
                     case 'e' -> {
                         if (g.getTargetY() > 0 && g.getTargetY() < width && g.getTargetX() > 0 && g.getTargetX() < width) {

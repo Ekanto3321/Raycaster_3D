@@ -121,8 +121,6 @@ public class Gfx extends JPanel{
             g.fillRect(0,0,width,width/2);
             g.setColor(new Color(52, 66, 51));
             g.fillRect(0,width/2,width,width/2);
-
-            g.setColor(new Color(199, 199, 199));
             for (int i = endA,inc=0; i >startA - fov / 2; i -= rayIncrement,inc++) {
                 x1 = x;
                 y1 = y;
